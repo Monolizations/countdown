@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Skull } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { DoomNotification } from "@/components/doom-notification"
+import { DoomNotifications } from "../components/doom-notification"
 
 export default function NotFound() {
   const [showNotification, setShowNotification] = useState(false)
@@ -56,11 +56,15 @@ export default function NotFound() {
       </div>
 
       {/* Custom Doom Notification */}
-      <DoomNotification
-        show={showNotification}
-        onClose={() => setShowNotification(false)}
-        message="LOCATION NOT FOUND IN THIS DIMENSION"
-      />
+      <DoomNotifications
+  notifications={
+    showNotification
+      ? [{ id: "1", title: "Warning", message: "LOCATION NOT FOUND IN THIS DIMENSION", type: "warning", timestamp: new Date() }]
+      : []
+  }
+  onDismiss={() => setShowNotification(false)}
+/>
+
     </div>
   )
 }
